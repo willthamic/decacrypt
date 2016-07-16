@@ -22,12 +22,13 @@ namespace Decacrypt
         }
     }
 
+    // Contains methods for prime number calculation.
     static class Prime
     {
         // Finds a large prime within a range.
-        // I: int n - How many bits the prime is.
+        // I: int n - Prime size in bits; string method - Method used for test; int k - iterations of testing;
         // O: BigInteger - The large prime. 
-        static public BigInteger FindPrime(int n)
+        static public BigInteger FindPrime(int n, string method, int k)
         {
             var rng = new RNGCryptoServiceProvider();
 
@@ -35,17 +36,23 @@ namespace Decacrypt
             {
                 byte[] bytes = new byte[n / 8];
                 rng.GetBytes(bytes);
-
                 BigInteger p = new BigInteger(bytes);
-                if (MillerRabin(p, 50) == 1)
+                switch (method)
                 {
-                    return p;
+                    case "Fermat":
+                        if (Fermat(p, k) == 1)
+                            return p;
+                        break;
+                    case "MillerRabin":
+                        if (MillerRabin(p, k) == 1)
+                            return p;
+                        break;
                 }
             }
         }
 
-        // Tests if a value is prime.
-        // I: BigInteger n - Value for testing; int k - How thorough the test is. (iterations of testing)
+        // Tests if a value is prime using Fermat algorithm.
+        // I: BigInteger n - Value for testing; int k - iterations of testing;
         // O: Byte - 0 for composite, 1 for prime, 2 for invalid.
         static private byte Fermat(BigInteger n, int k)
         {
@@ -64,7 +71,7 @@ namespace Decacrypt
             {
                 // Generates a random number between 2 and the lower of n - 2 and int.MaxValue.
                 // This is because the random function will not take a value larger than int.MaxValue.
-                BigInteger a = random.Next(2, (int)BigInteger.Min(n - 2, int.MaxValue));
+                BigInteger a = RandomRange(2, n - 2);
 
                 // Returns 0 for composite if a^(n-1)%n does not equal 1.
                 if (BigInteger.ModPow(a, n - 1, n) != 1)
@@ -74,7 +81,7 @@ namespace Decacrypt
             return 1;
         }
 
-        // Tests if a value is prime.
+        // Tests if a value is prime using MillerRabin algorithm.
         // I: BigInteger n - Value for testing; int k - How thorough the test is. (iterations of testing)
         // O: Byte - 0 for composite, 1 for prime, 2 for invalid.
         static private byte MillerRabin(BigInteger n, int k)
@@ -83,7 +90,6 @@ namespace Decacrypt
             int[] lowPrimes = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53 };
             BigInteger d = n - 1;
             int s = 0;
-            Random random = new Random();
 
             // Returns 2 for invalid if input is less than or equal to 1, or if the k value is 0 or less.
             if ((n <= 1) || (k <= 0))
@@ -108,7 +114,7 @@ namespace Decacrypt
             for (var i = 0; i < k; i++)
             {
                 // Creates random integer a between 2 and the lower of int.MaxValue and n - 1.
-                BigInteger a = random.Next(2, (int)BigInteger.Min(int.MaxValue, n - 1));
+                BigInteger a = RandomRange(2, n - 1);
 
                 // Sets x to a^d % n.
                 BigInteger x = BigInteger.ModPow(a, d, n);
@@ -134,6 +140,30 @@ namespace Decacrypt
                     return 0;
             }
             return 1;
+        }
+
+        // Generates a secure random BigInteger in a range, inclusive.
+        // I: BigInteger min - Lower side of range; BigInteger max - Upper side of range;
+        // O: BigInteger - Random BigInteger within range.
+        static public BigInteger RandomRange(BigInteger min, BigInteger max)
+        {
+            // Creates an array 'bytes' of the max value converted to bytes.
+            // A byte array is essentially the number represented in base 256.
+            byte[] bytes = max.ToByteArray();
+            BigInteger n;
+
+            // Used to generate cryptographically secure bytes or byte arrays.
+            var random = new RNGCryptoServiceProvider();
+
+            // Runs code block until 'n' is within the rnage of min and max, inclusive.
+            do
+            {
+                // Fills byte array 'bytes' with random bytes.
+                random.GetBytes(bytes);
+                n = new BigInteger(bytes);
+            } while (n > max || n < min);
+
+            return n;
         }
     }
 }

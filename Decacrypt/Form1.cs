@@ -16,5 +16,10 @@ namespace Decacrypt
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = Prime.FindPrime(4096, "MillerRabin", 50).ToString();
+        }
     }
 }

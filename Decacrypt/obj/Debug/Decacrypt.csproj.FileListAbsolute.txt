@@ -1,1 +1,9 @@
 C:\Users\Will\SkyDrive\Mine\Code\Duke\Decacrypt\Decacrypt\bin\Debug\Decacrypt.exe.config
+C:\Users\Will\SkyDrive\Mine\Code\Duke\Decacrypt\Decacrypt\bin\Debug\Decacrypt.exe
+C:\Users\Will\SkyDrive\Mine\Code\Duke\Decacrypt\Decacrypt\bin\Debug\Decacrypt.pdb
+C:\Users\Will\SkyDrive\Mine\Code\Duke\Decacrypt\Decacrypt\obj\Debug\Decacrypt.csprojResolveAssemblyReference.cache
+C:\Users\Will\SkyDrive\Mine\Code\Duke\Decacrypt\Decacrypt\obj\Debug\Decacrypt.Form1.resources
+C:\Users\Will\SkyDrive\Mine\Code\Duke\Decacrypt\Decacrypt\obj\Debug\Decacrypt.Properties.Resources.resources
+C:\Users\Will\SkyDrive\Mine\Code\Duke\Decacrypt\Decacrypt\obj\Debug\Decacrypt.csproj.GenerateResource.Cache
+C:\Users\Will\SkyDrive\Mine\Code\Duke\Decacrypt\Decacrypt\obj\Debug\Decacrypt.exe
+C:\Users\Will\SkyDrive\Mine\Code\Duke\Decacrypt\Decacrypt\obj\Debug\Decacrypt.pdb
