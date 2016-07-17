@@ -22,8 +22,149 @@ namespace Decacrypt
         }
     }
 
-    // Contains methods for prime number calculation.
-    static class Prime
+    class key
+    {
+        public BigInteger p;
+        public BigInteger q;
+        public BigInteger n;
+        public BigInteger e;
+        public BigInteger d;
+
+
+        // Checks to see if the key is valid.
+        // O: byte[] - length of 5, each index represents one of elements of the key, with the meaning of the values listed below.
+        //    Index [0] p: 0 - undefined; 1 - valid; 2 - composite; 8 - negative/low.
+        //    Index [1] q: 0 - undefined; 1 - valid; 2 - composite; 8 - negative/low.
+        //    Index [2] n: 0 - undefined; 1 - valid; 2 - possibly valid; 3 - prime; 4 - too many factors (p or q not prime); 5 - incorrect product; 8 - negative/low.
+        //    Index [3] e: 0 - undefined; 1 - valid; 2 - possibly valid; 3 - too high; 4 - not coprime with (p-1)(q-1); 5 - not modinv of d mod (p-1)(q-1); 8 - negative/low.
+        //    Index [4] d: 0 - undefined; 1 - valid; 2 - possibly valid; 3 - not modinv of d mod (p-1)(q-1); 8 - negative/low.
+        public byte[] Validate ()
+        {
+            // Array showing the current validity of the key.
+            byte[] array = { 0, 0, 0, 0, 0 };
+
+            // If 'p' is defined, test it for primality with the MillerRabin algorithm.
+            if (p != 0)
+                // The MillerRabin function returns 0 for composite, 1 for prime, 2 for invalid.
+                // This has to be converted to 2 for composite, 1 for prime, 8 for invalid, for consistency, and then set to the index for 'p'.
+                array[0] = new byte[] { 2, 1, 8 }[CryptoMath.MillerRabin(p, 50)];
+
+            // If 'p' is defined, test it for primality with the MillerRabin algorithm.
+            if (q != 0)
+                // The MillerRabin function returns 0 for composite, 1 for prime, 2 for invalid.
+                // This has to be converted to 2 for composite, 1 for prime, 8 for invalid, for consistency, and then set to the index for 'q'.
+                array[1] = new byte[] { 2, 1, 8 }[CryptoMath.MillerRabin(q, 50)];
+
+            // Runs if 'n' is defined (value other than 0).
+            if (n != 0)
+            {
+                array[2] = ValidateModulus(p, q, n, array);
+            }
+
+            // Runs if 'e' is defined.
+            if (e != 0)
+            {
+                array[3] = ValidateExponent(p, q, n, e, d);
+            }
+
+            // Runs if 'd' is defined.
+            if (e != 0)
+            {
+                array[4] = ValidateExponent(p, q, n, d, e);
+            }
+
+            return array;
+        }
+
+        public byte ValidateModulus (BigInteger p, BigInteger q, BigInteger n, byte[] array)
+        {
+            byte validity = 0;
+            
+            // Sets the index for 'n' to 8 for negative/low if the value is less than 6.
+            if (n < 6)
+                validity = 8;
+
+            // Runs if both 'p' and 'q' are defined.
+            else if (p != 0 && q != 0)
+            {
+                // If both 'p' and 'q' are prime and p*q equals n, set the index for 'n' to 1 for valid.
+                if (array[0] == 1 && array[1] == 1 && p * q == n)
+                    validity = 1;
+
+                // If 'p*q' does not equal 'n', set the index for 'n' to 5 for incorrect product. 
+                else if (p * q != n)
+                    validity = 5;
+
+                // If either 'p' or 'q' is composite, and 'p*q' equals 'n', set the index for 'n' to 4 for too many factors.
+                else if (array[0] == 0 || array[1] == 0 && p * q == n)
+                    validity = 4;
+
+                // If 'n' is prime, set the index for 'n' to 3 for prime.
+                else if (CryptoMath.MillerRabin(n, 50) == 1)
+                    validity = 3;
+
+                // If these pass, set the index for 'n' to 1 for valid.
+                else
+                    validity = 1;
+            }
+
+            // Runs if either 'p' or 'q' are undefined (equal to 0).
+            else
+            {
+                // If 'n' is composite, set the index for 'n' to 2 for possibly valid.
+                if (CryptoMath.MillerRabin(n, 50) == 0)
+                    validity = 2;
+            }
+
+            return validity;
+        }
+
+        public byte ValidateExponent (BigInteger p, BigInteger q, BigInteger n, BigInteger e, BigInteger d)
+        {
+            byte validity = 0;
+
+            // If 'e' is lower than two, set the index for 'e' to 8 for negative/low.
+            if (e < 2)
+                validity = 8;
+
+            // Runs if 'p' and 'q' and 'n' are defined.
+            else if (p != 0 && q != 0 && n != 0)
+            {
+                // If 'e' is larger than or equal to '(p-1)(n-1)', set the index for 'e' to 3 for too high.
+                if (e >= (p - 1) * (n - 1))
+                    validity = 3;
+
+                // If 'e' and '(p-1)(n-1)' are not coprime, set the index for 'e' to 4 for not coprime with '(p-1)(n-1)'.
+                else if (BigInteger.GreatestCommonDivisor(e, (p - 1) * (q - 1)) != 1)
+                    validity = 4;
+
+                // If 'd' is defined and the modular inverse of 'd' mod '(p-1)(q-1)' does not equal e, set the index for 'e' to 5 for not modinv of d mod (p-1)(q-1).
+                else if (e != 0 && CryptoMath.ModInv(d, (p - 1) * (q - 1)) == e)
+                    validity = 5;
+
+                // If above pass, set the index for 'e' to 1 for valid.
+                else
+                    validity = 1;
+            }
+
+            // Runs if either 'p' or 'q' or 'n' are undefined.
+            else if (p == 0 || q == 0)
+            {
+                // If 'n' is defined and 'e' is larger than 'n', set the index of 'e' to 3 for too high.
+                if (n != 0 && e >= n)
+                    validity = 3;
+
+                // If above pass, set the index of 'e' to 2 for possibly valid.
+                else
+                    validity = 2;
+            }
+
+            return validity;
+        }
+    }
+
+    // Contains math methods for cryptography.
+    class CryptoMath
     {
         // Finds a large prime within a range.
         // I: int n - Prime size in bits; string method - Method used for test; int k - iterations of testing;
@@ -54,7 +195,7 @@ namespace Decacrypt
         // Tests if a value is prime using Fermat algorithm.
         // I: BigInteger n - Value for testing; int k - iterations of testing;
         // O: Byte - 0 for composite, 1 for prime, 2 for invalid.
-        static private byte Fermat(BigInteger n, int k)
+        static public byte Fermat(BigInteger n, int k)
         {
             Random random = new Random();
 
@@ -84,7 +225,7 @@ namespace Decacrypt
         // Tests if a value is prime using MillerRabin algorithm.
         // I: BigInteger n - Value for testing; int k - How thorough the test is. (iterations of testing)
         // O: Byte - 0 for composite, 1 for prime, 2 for invalid.
-        static private byte MillerRabin(BigInteger n, int k)
+        static public byte MillerRabin(BigInteger n, int k)
         {
             // Array of first 16 primes.
             int[] lowPrimes = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53 };
@@ -164,6 +305,17 @@ namespace Decacrypt
             } while (n > max || n < min);
 
             return n;
+        }
+
+        // Finds the modular inverse of a number 'a' modulo another number 'b'.
+        // I: BigInteger a; BigInteger b;
+        // O: BigInteger - modular inverse of a mod b.
+        static public BigInteger ModInv(BigInteger a, BigInteger b)
+        {
+            if (BigInteger.GreatestCommonDivisor(a, b) == 1)
+                return BigInteger.ModPow(a, b - 2, b);
+            else
+                return -1;
         }
     }
 }
