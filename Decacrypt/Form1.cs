@@ -21,5 +21,10 @@ namespace Decacrypt
         {
             textBox1.Text = CryptoMath.FindPrime(4096, "MillerRabin", 50).ToString();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

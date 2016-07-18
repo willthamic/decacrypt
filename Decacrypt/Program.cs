@@ -18,11 +18,11 @@ namespace Decacrypt
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new Main());
         }
     }
 
-    class key
+    class Key
     {
         public BigInteger p;
         public BigInteger q;
@@ -30,18 +30,18 @@ namespace Decacrypt
         public BigInteger e;
         public BigInteger d;
 
-
         // Checks to see if the key is valid.
-        // O: byte[] - length of 5, each index represents one of elements of the key, with the meaning of the values listed below.
-        //    Index [0] p: 0 - undefined; 1 - valid; 2 - composite; 8 - negative/low.
-        //    Index [1] q: 0 - undefined; 1 - valid; 2 - composite; 8 - negative/low.
-        //    Index [2] n: 0 - undefined; 1 - valid; 2 - possibly valid; 3 - prime; 4 - too many factors (p or q not prime); 5 - incorrect product; 8 - negative/low.
-        //    Index [3] e: 0 - undefined; 1 - valid; 2 - possibly valid; 3 - too high; 4 - not coprime with (p-1)(q-1); 5 - not modinv of d mod (p-1)(q-1); 8 - negative/low.
-        //    Index [4] d: 0 - undefined; 1 - valid; 2 - possibly valid; 3 - not modinv of d mod (p-1)(q-1); 8 - negative/low.
-        public byte[] Validate ()
+        // O: byte[] - length of 6, each index represents one of elements of the key, with a final overall validity index. The meaning of the values are listed below.
+        //    Index [0]   p: 0 - undefined; 1 - valid; 2 - composite; 8 - negative/low.
+        //    Index [1]   q: 0 - undefined; 1 - valid; 2 - composite; 8 - negative/low.
+        //    Index [2]   n: 0 - undefined; 1 - valid; 2 - possibly valid; 3 - prime; 4 - too many factors (p or q not prime); 5 - incorrect product; 8 - negative/low.
+        //    Index [3]   e: 0 - undefined; 1 - valid; 2 - possibly valid; 3 - too high; 4 - not coprime with (p-1)(q-1); 5 - not modinv of d mod (p-1)(q-1); 8 - negative/low.
+        //    Index [4]   d: 0 - undefined; 1 - valid; 2 - possibly valid; 3 - too high; 4 - not coprime with (p-1)(q-1); 5 - not modinv of d mod (p-1)(q-1); 8 - negative/low.
+        //    Index [5] all: 1 - valid; 2 - possibly valid; 3 - invalid.
+        public byte[] Validate()
         {
             // Array showing the current validity of the key.
-            byte[] array = { 0, 0, 0, 0, 0 };
+            byte[] array = { 0, 0, 0, 0, 0, 0 };
 
             // If 'p' is defined, test it for primality with the MillerRabin algorithm.
             if (p != 0)
@@ -57,38 +57,53 @@ namespace Decacrypt
 
             // Runs if 'n' is defined (value other than 0).
             if (n != 0)
-            {
                 array[2] = ValidateModulus(p, q, n, array);
-            }
 
             // Runs if 'e' is defined.
             if (e != 0)
-            {
                 array[3] = ValidateExponent(p, q, n, e, d);
-            }
 
             // Runs if 'd' is defined.
-            if (e != 0)
-            {
+            if (d != 0)
                 array[4] = ValidateExponent(p, q, n, d, e);
-            }
+
+            // If the first 5 indexes are equal to 1, for valid, set the index 6 to 1 for valid.
+            if (array == new byte[] { 1, 1, 1, 1, 1, 0 })
+                array[5] = 1;
+
+            // If any of the first 5 indexes are not either valid, or possibly valid, or undefined, set the index for 6 to 3 for invalid.
+            else if ((array[0] != 0) && (array[0] != 1))
+                array[5] = 3;
+            else if ((array[1] != 0) && (array[1] != 1))
+                array[5] = 3;
+            else if ((array[2] != 1) && (array[2] != 2))
+                array[5] = 3;
+            else if ((array[3] != 1) && (array[3] != 2))
+                array[5] = 3;
+            else if ((array[4] != 0) && (array[4] != 1) && (array[4] != 2))
+                array[5] = 3;
+            else
+                array[5] = 2;
 
             return array;
         }
 
-        public byte ValidateModulus (BigInteger p, BigInteger q, BigInteger n, byte[] array)
+        // Check to see if a modulus, typically 'n', is valid.
+        // I: BigInteger p & q - The primes that make up 'n'; BigInteger n - Modulus to be checked; byte[] array - Array of current key validity.
+        // O: Byte - 0 - undefined; 1 - valid; 2 - possibly valid; 3 - prime; 4 - too many factors (p or q not prime); 5 - incorrect product; 8 - negative/low.
+        public byte ValidateModulus(BigInteger p, BigInteger q, BigInteger n, byte[] array)
         {
             byte validity = 0;
-            
+
             // Sets the index for 'n' to 8 for negative/low if the value is less than 6.
             if (n < 6)
                 validity = 8;
 
             // Runs if both 'p' and 'q' are defined.
-            else if (p != 0 && q != 0)
+            else if ((p != 0) && (q != 0))
             {
                 // If both 'p' and 'q' are prime and p*q equals n, set the index for 'n' to 1 for valid.
-                if (array[0] == 1 && array[1] == 1 && p * q == n)
+                if ((array[0] == 1) && (array[1] == 1) && (p * q == n))
                     validity = 1;
 
                 // If 'p*q' does not equal 'n', set the index for 'n' to 5 for incorrect product. 
@@ -96,7 +111,7 @@ namespace Decacrypt
                     validity = 5;
 
                 // If either 'p' or 'q' is composite, and 'p*q' equals 'n', set the index for 'n' to 4 for too many factors.
-                else if (array[0] == 0 || array[1] == 0 && p * q == n)
+                else if (((array[0] == 0) || (array[1] == 0)) && (p * q == n))
                     validity = 4;
 
                 // If 'n' is prime, set the index for 'n' to 3 for prime.
@@ -119,7 +134,10 @@ namespace Decacrypt
             return validity;
         }
 
-        public byte ValidateExponent (BigInteger p, BigInteger q, BigInteger n, BigInteger e, BigInteger d)
+        // Checks if an exponent is valid.
+        // I: BigInteger p & q - primes making up 'n'; BigInteger n - modulus; BigInteger e - Exponent being validated; BigInteger d - Exponent being validated against.
+        // O: Byte - 0 - undefined; 1 - valid; 2 - possibly valid; 3 - too high; 4 - not coprime with (p-1)(q-1); 5 - not modinv of d mod (p-1)(q-1); 8 - negative/low.
+        public byte ValidateExponent(BigInteger p, BigInteger q, BigInteger n, BigInteger e, BigInteger d)
         {
             byte validity = 0;
 
@@ -128,7 +146,7 @@ namespace Decacrypt
                 validity = 8;
 
             // Runs if 'p' and 'q' and 'n' are defined.
-            else if (p != 0 && q != 0 && n != 0)
+            else if ((p != 0) && (q != 0) && (n != 0))
             {
                 // If 'e' is larger than or equal to '(p-1)(n-1)', set the index for 'e' to 3 for too high.
                 if (e >= (p - 1) * (n - 1))
@@ -139,7 +157,7 @@ namespace Decacrypt
                     validity = 4;
 
                 // If 'd' is defined and the modular inverse of 'd' mod '(p-1)(q-1)' does not equal e, set the index for 'e' to 5 for not modinv of d mod (p-1)(q-1).
-                else if (e != 0 && CryptoMath.ModInv(d, (p - 1) * (q - 1)) == e)
+                else if ((e != 0) && (CryptoMath.ModInv(d, (p - 1) * (q - 1)) == e))
                     validity = 5;
 
                 // If above pass, set the index for 'e' to 1 for valid.
@@ -148,10 +166,10 @@ namespace Decacrypt
             }
 
             // Runs if either 'p' or 'q' or 'n' are undefined.
-            else if (p == 0 || q == 0)
+            else if ((p == 0) || (q == 0))
             {
                 // If 'n' is defined and 'e' is larger than 'n', set the index of 'e' to 3 for too high.
-                if (n != 0 && e >= n)
+                if ((n != 0) && (e >= n))
                     validity = 3;
 
                 // If above pass, set the index of 'e' to 2 for possibly valid.
@@ -263,11 +281,11 @@ namespace Decacrypt
                 // This boolean is used to break the inner loop and continue the parent loop.
                 bool tmp = true;
 
-                if (x == 1 || x == n - 1)
+                if ((x == 1) || (x == n - 1))
                     continue;
 
                 // Tests the value of d with all combinations of factors of 2.
-                for (var r = 1; r <= s - 1 && tmp; r++)
+                for (var r = 1; (r <= s - 1) && tmp; r++)
                 {
                     x = BigInteger.ModPow(x, 2, n);
                     if (x == 1)
@@ -302,7 +320,7 @@ namespace Decacrypt
                 // Fills byte array 'bytes' with random bytes.
                 random.GetBytes(bytes);
                 n = new BigInteger(bytes);
-            } while (n > max || n < min);
+            } while ((n > max) || (n < min));
 
             return n;
         }

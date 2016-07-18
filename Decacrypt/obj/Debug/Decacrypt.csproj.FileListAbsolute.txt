@@ -7,3 +7,4 @@ C:\Users\Will\SkyDrive\Mine\Code\Duke\Decacrypt\Decacrypt\obj\Debug\Decacrypt.Pr
 C:\Users\Will\SkyDrive\Mine\Code\Duke\Decacrypt\Decacrypt\obj\Debug\Decacrypt.csproj.GenerateResource.Cache
 C:\Users\Will\SkyDrive\Mine\Code\Duke\Decacrypt\Decacrypt\obj\Debug\Decacrypt.exe
 C:\Users\Will\SkyDrive\Mine\Code\Duke\Decacrypt\Decacrypt\obj\Debug\Decacrypt.pdb
+C:\Users\Will\SkyDrive\Mine\Code\Duke\Decacrypt\Decacrypt\obj\Debug\Decacrypt.Main.resources
