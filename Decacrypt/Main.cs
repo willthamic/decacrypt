@@ -56,30 +56,28 @@ namespace Decacrypt
 
         private void buttonNewP_Click(object sender, EventArgs e)
         {
+            UpdateKey();
+
             // Generate a new prime with the amount of bits specified by the trackbar.
-            BigInteger p = CryptoMath.FindPrime(trackBarP.Value, "MillerRabin", 50);
+            MainKey.p = CryptoMath.FindPrime(trackBarP.Value, "MillerRabin", 50);
 
-            // Set 'q' to the textboxQ.
-            BigInteger q;
-            BigInteger.TryParse(textBoxQ.Text, out q);
-
-            // Reset textboxes 'p' and 'n' the the correct values.
-            textBoxP.Text = p.ToString();
-            textBoxN.Text = (p * q).ToString();
+            // Reset textboxes 'q' and 'n' to the correct values.
+            textBoxP.Text = MainKey.p.ToString();
+            if (MainKey.q != 0)
+                textBoxN.Text = (MainKey.p * MainKey.q).ToString();
         }
 
         private void buttonNewQ_Click(object sender, EventArgs e)
         {
-            // Set 'p' to the textboxP.
-            BigInteger p;
-            BigInteger.TryParse(textBoxQ.Text, out p);
+            UpdateKey();
 
             // Generate a new prime with the amount of bits specified by the trackbar.
-            BigInteger q = CryptoMath.FindPrime(trackBarQ.Value, "MillerRabin", 50);
+            MainKey.q = CryptoMath.FindPrime(trackBarQ.Value, "MillerRabin", 50);
 
             // Reset textboxes 'q' and 'n' to the correct values.
-            textBoxQ.Text = q.ToString();
-            textBoxN.Text = (p * q).ToString();
+            textBoxQ.Text = MainKey.q.ToString();
+            if (MainKey.p != 0)
+                textBoxN.Text = (MainKey.p * MainKey.q).ToString();
         }
 
         private void buttonNewN_Click(object sender, EventArgs e)
