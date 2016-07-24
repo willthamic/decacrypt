@@ -101,12 +101,15 @@ namespace Decacrypt
             // Generate a prime at the size of the bits set by the 'e' trackbar.
             BigInteger pubExp = CryptoMath.FindPrime(trackBarE.Value, "MillerRabin", 50);
             textBoxE.Text = pubExp.ToString();
+            MainKey.e = pubExp;
 
             byte[] validity = MainKey.Validate();
 
             if (validity[0] == 1 && validity[1] == 1)
             {
-
+                BigInteger pvtExp = CryptoMath.ModInv(MainKey.e, (MainKey.p - 1) * (MainKey.q - 1));
+                textBoxD.Text = pvtExp.ToString();
+                MainKey.d = pvtExp;
             }
 
         }
@@ -160,7 +163,26 @@ namespace Decacrypt
 
             byte[] validity = MainKey.Validate();
 
-            if (validity[0] == 1 && validity[1] == 1 && validity[4] == )
+            if (validity[0] == 1 && validity[1] == 1 && validity[4] == 1)
+            {
+                BigInteger pubKey = CryptoMath.ModInv(MainKey.d, (MainKey.p - 1) * (MainKey.q - 1));
+                textBoxE.Text = pubKey.ToString();
+                MainKey.e = pubKey;
+            }
+        }
+
+        private void buttonFixD_Click(object sender, EventArgs e)
+        {
+            UpdateKey();
+
+            byte[] validity = MainKey.Validate();
+
+            if (validity[0] == 1 && validity[1] == 1 && validity[3] == 1)
+            {
+                BigInteger pvtKey = CryptoMath.ModInv(MainKey.e, (MainKey.p - 1) * (MainKey.q - 1));
+                textBoxD.Text = pvtKey.ToString();
+                MainKey.d = pvtKey;
+            }
         }
     }
 }

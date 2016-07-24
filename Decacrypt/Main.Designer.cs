@@ -111,6 +111,7 @@
             this.buttonFixD.TabIndex = 35;
             this.buttonFixD.Text = "Fix";
             this.buttonFixD.UseVisualStyleBackColor = true;
+            this.buttonFixD.Click += new System.EventHandler(this.buttonFixD_Click);
             // 
             // buttonFixE
             // 
