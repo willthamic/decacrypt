@@ -29,40 +29,50 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBoxP = new System.Windows.Forms.TextBox();
-            this.textBoxQ = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBoxN = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBoxE = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBoxD = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.trackBarP = new System.Windows.Forms.TrackBar();
-            this.buttonNewP = new System.Windows.Forms.Button();
-            this.buttonNewQ = new System.Windows.Forms.Button();
-            this.trackBarQ = new System.Windows.Forms.TrackBar();
-            this.label7 = new System.Windows.Forms.Label();
-            this.buttonNewN = new System.Windows.Forms.Button();
-            this.trackBarN = new System.Windows.Forms.TrackBar();
-            this.label8 = new System.Windows.Forms.Label();
+            this.buttonFixD = new System.Windows.Forms.Button();
+            this.buttonFixE = new System.Windows.Forms.Button();
+            this.buttonFixN = new System.Windows.Forms.Button();
+            this.buttonFixQ = new System.Windows.Forms.Button();
+            this.buttonFixP = new System.Windows.Forms.Button();
+            this.buttonCopyPrivate = new System.Windows.Forms.Button();
+            this.buttonVerifyKey = new System.Windows.Forms.Button();
+            this.buttonCopyPublic = new System.Windows.Forms.Button();
             this.buttonNewE = new System.Windows.Forms.Button();
             this.trackBarE = new System.Windows.Forms.TrackBar();
             this.label9 = new System.Windows.Forms.Label();
-            this.buttonCopyPublic = new System.Windows.Forms.Button();
-            this.buttonVerifyKey = new System.Windows.Forms.Button();
-            this.buttonCopyPrivate = new System.Windows.Forms.Button();
+            this.buttonNewN = new System.Windows.Forms.Button();
+            this.trackBarN = new System.Windows.Forms.TrackBar();
+            this.label8 = new System.Windows.Forms.Label();
+            this.buttonNewQ = new System.Windows.Forms.Button();
+            this.trackBarQ = new System.Windows.Forms.TrackBar();
+            this.label7 = new System.Windows.Forms.Label();
+            this.buttonNewP = new System.Windows.Forms.Button();
+            this.trackBarP = new System.Windows.Forms.TrackBar();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBoxD = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBoxE = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBoxN = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBoxQ = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBoxP = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarP)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarQ)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarE)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarN)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarQ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarP)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.buttonFixD);
+            this.panel1.Controls.Add(this.buttonFixE);
+            this.panel1.Controls.Add(this.buttonFixN);
+            this.panel1.Controls.Add(this.buttonFixQ);
+            this.panel1.Controls.Add(this.buttonFixP);
             this.panel1.Controls.Add(this.buttonCopyPrivate);
             this.panel1.Controls.Add(this.buttonVerifyKey);
             this.panel1.Controls.Add(this.buttonCopyPublic);
@@ -90,198 +100,100 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(12, 13);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(436, 445);
+            this.panel1.Size = new System.Drawing.Size(436, 451);
             this.panel1.TabIndex = 0;
             // 
-            // label1
+            // buttonFixD
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(4, 4);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Prime P";
+            this.buttonFixD.Location = new System.Drawing.Point(358, 178);
+            this.buttonFixD.Name = "buttonFixD";
+            this.buttonFixD.Size = new System.Drawing.Size(75, 23);
+            this.buttonFixD.TabIndex = 35;
+            this.buttonFixD.Text = "Fix";
+            this.buttonFixD.UseVisualStyleBackColor = true;
             // 
-            // textBoxP
+            // buttonFixE
             // 
-            this.textBoxP.Location = new System.Drawing.Point(4, 21);
-            this.textBoxP.Name = "textBoxP";
-            this.textBoxP.Size = new System.Drawing.Size(429, 20);
-            this.textBoxP.TabIndex = 1;
+            this.buttonFixE.Location = new System.Drawing.Point(358, 139);
+            this.buttonFixE.Name = "buttonFixE";
+            this.buttonFixE.Size = new System.Drawing.Size(75, 23);
+            this.buttonFixE.TabIndex = 34;
+            this.buttonFixE.Text = "Fix";
+            this.buttonFixE.UseVisualStyleBackColor = true;
+            this.buttonFixE.Click += new System.EventHandler(this.buttonFixE_Click);
             // 
-            // textBoxQ
+            // buttonFixN
             // 
-            this.textBoxQ.Location = new System.Drawing.Point(4, 61);
-            this.textBoxQ.Name = "textBoxQ";
-            this.textBoxQ.Size = new System.Drawing.Size(429, 20);
-            this.textBoxQ.TabIndex = 3;
+            this.buttonFixN.Location = new System.Drawing.Point(358, 99);
+            this.buttonFixN.Name = "buttonFixN";
+            this.buttonFixN.Size = new System.Drawing.Size(75, 23);
+            this.buttonFixN.TabIndex = 33;
+            this.buttonFixN.Text = "Fix";
+            this.buttonFixN.UseVisualStyleBackColor = true;
+            this.buttonFixN.Click += new System.EventHandler(this.buttonFixN_Click);
             // 
-            // label2
+            // buttonFixQ
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(4, 44);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Prime Q";
+            this.buttonFixQ.Location = new System.Drawing.Point(358, 59);
+            this.buttonFixQ.Name = "buttonFixQ";
+            this.buttonFixQ.Size = new System.Drawing.Size(75, 23);
+            this.buttonFixQ.TabIndex = 32;
+            this.buttonFixQ.Text = "Fix";
+            this.buttonFixQ.UseVisualStyleBackColor = true;
+            this.buttonFixQ.Click += new System.EventHandler(this.buttonFixQ_Click);
             // 
-            // textBoxN
+            // buttonFixP
             // 
-            this.textBoxN.Location = new System.Drawing.Point(4, 101);
-            this.textBoxN.Name = "textBoxN";
-            this.textBoxN.Size = new System.Drawing.Size(429, 20);
-            this.textBoxN.TabIndex = 5;
+            this.buttonFixP.Location = new System.Drawing.Point(358, 19);
+            this.buttonFixP.Name = "buttonFixP";
+            this.buttonFixP.Size = new System.Drawing.Size(75, 23);
+            this.buttonFixP.TabIndex = 31;
+            this.buttonFixP.Text = "Fix";
+            this.buttonFixP.UseVisualStyleBackColor = true;
+            this.buttonFixP.Click += new System.EventHandler(this.buttonFixP_Click);
             // 
-            // label3
+            // buttonCopyPrivate
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(4, 84);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(47, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Modulus";
+            this.buttonCopyPrivate.Location = new System.Drawing.Point(149, 424);
+            this.buttonCopyPrivate.Name = "buttonCopyPrivate";
+            this.buttonCopyPrivate.Size = new System.Drawing.Size(140, 23);
+            this.buttonCopyPrivate.TabIndex = 30;
+            this.buttonCopyPrivate.Text = "Copy Private";
+            this.buttonCopyPrivate.UseVisualStyleBackColor = true;
             // 
-            // textBoxE
+            // buttonVerifyKey
             // 
-            this.textBoxE.Location = new System.Drawing.Point(4, 141);
-            this.textBoxE.Name = "textBoxE";
-            this.textBoxE.Size = new System.Drawing.Size(429, 20);
-            this.textBoxE.TabIndex = 7;
+            this.buttonVerifyKey.Location = new System.Drawing.Point(293, 424);
+            this.buttonVerifyKey.Name = "buttonVerifyKey";
+            this.buttonVerifyKey.Size = new System.Drawing.Size(140, 23);
+            this.buttonVerifyKey.TabIndex = 29;
+            this.buttonVerifyKey.Text = "Verify Key";
+            this.buttonVerifyKey.UseVisualStyleBackColor = true;
+            this.buttonVerifyKey.Click += new System.EventHandler(this.buttonVerifyKey_Click);
             // 
-            // label4
+            // buttonCopyPublic
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(4, 124);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(60, 13);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Public Exp.";
-            // 
-            // textBoxD
-            // 
-            this.textBoxD.Location = new System.Drawing.Point(4, 181);
-            this.textBoxD.Name = "textBoxD";
-            this.textBoxD.Size = new System.Drawing.Size(429, 20);
-            this.textBoxD.TabIndex = 9;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(4, 164);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(64, 13);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "Private Exp.";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(4, 212);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(14, 13);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "P";
-            // 
-            // trackBarP
-            // 
-            this.trackBarP.LargeChange = 32;
-            this.trackBarP.Location = new System.Drawing.Point(24, 207);
-            this.trackBarP.Maximum = 2048;
-            this.trackBarP.Minimum = 32;
-            this.trackBarP.Name = "trackBarP";
-            this.trackBarP.Size = new System.Drawing.Size(328, 45);
-            this.trackBarP.SmallChange = 32;
-            this.trackBarP.TabIndex = 11;
-            this.trackBarP.TickFrequency = 32;
-            this.trackBarP.Value = 32;
-            // 
-            // buttonNewP
-            // 
-            this.buttonNewP.Location = new System.Drawing.Point(358, 207);
-            this.buttonNewP.Name = "buttonNewP";
-            this.buttonNewP.Size = new System.Drawing.Size(75, 23);
-            this.buttonNewP.TabIndex = 18;
-            this.buttonNewP.Text = "New";
-            this.buttonNewP.UseVisualStyleBackColor = true;
-            this.buttonNewP.Click += new System.EventHandler(this.buttonNewP_Click);
-            // 
-            // buttonNewQ
-            // 
-            this.buttonNewQ.Location = new System.Drawing.Point(358, 258);
-            this.buttonNewQ.Name = "buttonNewQ";
-            this.buttonNewQ.Size = new System.Drawing.Size(75, 23);
-            this.buttonNewQ.TabIndex = 21;
-            this.buttonNewQ.Text = "New";
-            this.buttonNewQ.UseVisualStyleBackColor = true;
-            this.buttonNewQ.Click += new System.EventHandler(this.buttonNewQ_Click);
-            // 
-            // trackBarQ
-            // 
-            this.trackBarQ.LargeChange = 32;
-            this.trackBarQ.Location = new System.Drawing.Point(24, 258);
-            this.trackBarQ.Maximum = 2048;
-            this.trackBarQ.Minimum = 32;
-            this.trackBarQ.Name = "trackBarQ";
-            this.trackBarQ.Size = new System.Drawing.Size(328, 45);
-            this.trackBarQ.SmallChange = 32;
-            this.trackBarQ.TabIndex = 20;
-            this.trackBarQ.TickFrequency = 32;
-            this.trackBarQ.Value = 32;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(4, 263);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(15, 13);
-            this.label7.TabIndex = 19;
-            this.label7.Text = "Q";
-            // 
-            // buttonNewN
-            // 
-            this.buttonNewN.Location = new System.Drawing.Point(358, 309);
-            this.buttonNewN.Name = "buttonNewN";
-            this.buttonNewN.Size = new System.Drawing.Size(75, 23);
-            this.buttonNewN.TabIndex = 24;
-            this.buttonNewN.Text = "New";
-            this.buttonNewN.UseVisualStyleBackColor = true;
-            this.buttonNewN.Click += new System.EventHandler(this.buttonNewN_Click);
-            // 
-            // trackBarN
-            // 
-            this.trackBarN.LargeChange = 32;
-            this.trackBarN.Location = new System.Drawing.Point(24, 309);
-            this.trackBarN.Maximum = 2048;
-            this.trackBarN.Minimum = 32;
-            this.trackBarN.Name = "trackBarN";
-            this.trackBarN.Size = new System.Drawing.Size(328, 45);
-            this.trackBarN.SmallChange = 32;
-            this.trackBarN.TabIndex = 23;
-            this.trackBarN.TickFrequency = 32;
-            this.trackBarN.Value = 32;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(4, 314);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(15, 13);
-            this.label8.TabIndex = 22;
-            this.label8.Text = "N";
+            this.buttonCopyPublic.Location = new System.Drawing.Point(4, 424);
+            this.buttonCopyPublic.Name = "buttonCopyPublic";
+            this.buttonCopyPublic.Size = new System.Drawing.Size(140, 23);
+            this.buttonCopyPublic.TabIndex = 28;
+            this.buttonCopyPublic.Text = "Copy Public";
+            this.buttonCopyPublic.UseVisualStyleBackColor = true;
             // 
             // buttonNewE
             // 
-            this.buttonNewE.Location = new System.Drawing.Point(358, 360);
+            this.buttonNewE.Location = new System.Drawing.Point(358, 373);
             this.buttonNewE.Name = "buttonNewE";
             this.buttonNewE.Size = new System.Drawing.Size(75, 23);
             this.buttonNewE.TabIndex = 27;
             this.buttonNewE.Text = "New";
             this.buttonNewE.UseVisualStyleBackColor = true;
+            this.buttonNewE.Click += new System.EventHandler(this.buttonNewE_Click);
             // 
             // trackBarE
             // 
             this.trackBarE.LargeChange = 32;
-            this.trackBarE.Location = new System.Drawing.Point(24, 360);
+            this.trackBarE.Location = new System.Drawing.Point(24, 373);
             this.trackBarE.Maximum = 2048;
             this.trackBarE.Minimum = 32;
             this.trackBarE.Name = "trackBarE";
@@ -294,55 +206,203 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(4, 365);
+            this.label9.Location = new System.Drawing.Point(4, 378);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(14, 13);
             this.label9.TabIndex = 25;
             this.label9.Text = "E";
             // 
-            // buttonCopyPublic
+            // buttonNewN
             // 
-            this.buttonCopyPublic.Location = new System.Drawing.Point(4, 411);
-            this.buttonCopyPublic.Name = "buttonCopyPublic";
-            this.buttonCopyPublic.Size = new System.Drawing.Size(140, 23);
-            this.buttonCopyPublic.TabIndex = 28;
-            this.buttonCopyPublic.Text = "Copy Public";
-            this.buttonCopyPublic.UseVisualStyleBackColor = true;
+            this.buttonNewN.Location = new System.Drawing.Point(358, 322);
+            this.buttonNewN.Name = "buttonNewN";
+            this.buttonNewN.Size = new System.Drawing.Size(75, 23);
+            this.buttonNewN.TabIndex = 24;
+            this.buttonNewN.Text = "New";
+            this.buttonNewN.UseVisualStyleBackColor = true;
+            this.buttonNewN.Click += new System.EventHandler(this.buttonNewN_Click);
             // 
-            // buttonVerifyKey
+            // trackBarN
             // 
-            this.buttonVerifyKey.Location = new System.Drawing.Point(293, 411);
-            this.buttonVerifyKey.Name = "buttonVerifyKey";
-            this.buttonVerifyKey.Size = new System.Drawing.Size(140, 23);
-            this.buttonVerifyKey.TabIndex = 29;
-            this.buttonVerifyKey.Text = "Verify Key";
-            this.buttonVerifyKey.UseVisualStyleBackColor = true;
-            this.buttonVerifyKey.Click += new System.EventHandler(this.buttonVerifyKey_Click);
+            this.trackBarN.LargeChange = 32;
+            this.trackBarN.Location = new System.Drawing.Point(24, 322);
+            this.trackBarN.Maximum = 2048;
+            this.trackBarN.Minimum = 32;
+            this.trackBarN.Name = "trackBarN";
+            this.trackBarN.Size = new System.Drawing.Size(328, 45);
+            this.trackBarN.SmallChange = 32;
+            this.trackBarN.TabIndex = 23;
+            this.trackBarN.TickFrequency = 32;
+            this.trackBarN.Value = 32;
             // 
-            // buttonCopyPrivate
+            // label8
             // 
-            this.buttonCopyPrivate.Location = new System.Drawing.Point(149, 411);
-            this.buttonCopyPrivate.Name = "buttonCopyPrivate";
-            this.buttonCopyPrivate.Size = new System.Drawing.Size(140, 23);
-            this.buttonCopyPrivate.TabIndex = 30;
-            this.buttonCopyPrivate.Text = "Copy Private";
-            this.buttonCopyPrivate.UseVisualStyleBackColor = true;
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(4, 327);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(15, 13);
+            this.label8.TabIndex = 22;
+            this.label8.Text = "N";
+            // 
+            // buttonNewQ
+            // 
+            this.buttonNewQ.Location = new System.Drawing.Point(358, 271);
+            this.buttonNewQ.Name = "buttonNewQ";
+            this.buttonNewQ.Size = new System.Drawing.Size(75, 23);
+            this.buttonNewQ.TabIndex = 21;
+            this.buttonNewQ.Text = "New";
+            this.buttonNewQ.UseVisualStyleBackColor = true;
+            this.buttonNewQ.Click += new System.EventHandler(this.buttonNewQ_Click);
+            // 
+            // trackBarQ
+            // 
+            this.trackBarQ.LargeChange = 32;
+            this.trackBarQ.Location = new System.Drawing.Point(24, 271);
+            this.trackBarQ.Maximum = 2048;
+            this.trackBarQ.Minimum = 32;
+            this.trackBarQ.Name = "trackBarQ";
+            this.trackBarQ.Size = new System.Drawing.Size(328, 45);
+            this.trackBarQ.SmallChange = 32;
+            this.trackBarQ.TabIndex = 20;
+            this.trackBarQ.TickFrequency = 32;
+            this.trackBarQ.Value = 32;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(4, 276);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(15, 13);
+            this.label7.TabIndex = 19;
+            this.label7.Text = "Q";
+            // 
+            // buttonNewP
+            // 
+            this.buttonNewP.Location = new System.Drawing.Point(358, 220);
+            this.buttonNewP.Name = "buttonNewP";
+            this.buttonNewP.Size = new System.Drawing.Size(75, 23);
+            this.buttonNewP.TabIndex = 18;
+            this.buttonNewP.Text = "New";
+            this.buttonNewP.UseVisualStyleBackColor = true;
+            this.buttonNewP.Click += new System.EventHandler(this.buttonNewP_Click);
+            // 
+            // trackBarP
+            // 
+            this.trackBarP.LargeChange = 32;
+            this.trackBarP.Location = new System.Drawing.Point(24, 220);
+            this.trackBarP.Maximum = 2048;
+            this.trackBarP.Minimum = 32;
+            this.trackBarP.Name = "trackBarP";
+            this.trackBarP.Size = new System.Drawing.Size(328, 45);
+            this.trackBarP.SmallChange = 32;
+            this.trackBarP.TabIndex = 11;
+            this.trackBarP.TickFrequency = 32;
+            this.trackBarP.Value = 32;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(4, 225);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(14, 13);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "P";
+            // 
+            // textBoxD
+            // 
+            this.textBoxD.Location = new System.Drawing.Point(4, 180);
+            this.textBoxD.Name = "textBoxD";
+            this.textBoxD.Size = new System.Drawing.Size(348, 20);
+            this.textBoxD.TabIndex = 9;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(4, 164);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(81, 13);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Private Exp. (D)";
+            // 
+            // textBoxE
+            // 
+            this.textBoxE.Location = new System.Drawing.Point(4, 141);
+            this.textBoxE.Name = "textBoxE";
+            this.textBoxE.Size = new System.Drawing.Size(348, 20);
+            this.textBoxE.TabIndex = 7;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(4, 124);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(76, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Public Exp. (E)";
+            // 
+            // textBoxN
+            // 
+            this.textBoxN.Location = new System.Drawing.Point(4, 101);
+            this.textBoxN.Name = "textBoxN";
+            this.textBoxN.Size = new System.Drawing.Size(348, 20);
+            this.textBoxN.TabIndex = 5;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(4, 84);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(64, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Modulus (N)";
+            // 
+            // textBoxQ
+            // 
+            this.textBoxQ.Location = new System.Drawing.Point(4, 61);
+            this.textBoxQ.Name = "textBoxQ";
+            this.textBoxQ.Size = new System.Drawing.Size(348, 20);
+            this.textBoxQ.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(4, 44);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(44, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Prime Q";
+            // 
+            // textBoxP
+            // 
+            this.textBoxP.Location = new System.Drawing.Point(4, 21);
+            this.textBoxP.Name = "textBoxP";
+            this.textBoxP.Size = new System.Drawing.Size(348, 20);
+            this.textBoxP.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(4, 4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(43, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Prime P";
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(461, 467);
+            this.ClientSize = new System.Drawing.Size(461, 478);
             this.Controls.Add(this.panel1);
             this.Name = "Main";
             this.Text = "Main";
             this.Load += new System.EventHandler(this.Main_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarP)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarQ)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarE)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarN)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarQ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarP)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -375,5 +435,10 @@
         private System.Windows.Forms.Button buttonCopyPrivate;
         private System.Windows.Forms.Button buttonVerifyKey;
         private System.Windows.Forms.Button buttonCopyPublic;
+        private System.Windows.Forms.Button buttonFixD;
+        private System.Windows.Forms.Button buttonFixE;
+        private System.Windows.Forms.Button buttonFixN;
+        private System.Windows.Forms.Button buttonFixQ;
+        private System.Windows.Forms.Button buttonFixP;
     }
 }
