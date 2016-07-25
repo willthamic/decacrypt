@@ -59,11 +59,19 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxP = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textBoxM = new System.Windows.Forms.TextBox();
+            this.textBoxC = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.buttonEncrypt = new System.Windows.Forms.Button();
+            this.buttonDecrypt = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarE)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarQ)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarP)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -290,7 +298,7 @@
             // trackBarP
             // 
             this.trackBarP.LargeChange = 32;
-            this.trackBarP.Location = new System.Drawing.Point(24, 220);
+            this.trackBarP.Location = new System.Drawing.Point(24, 225);
             this.trackBarP.Maximum = 2048;
             this.trackBarP.Minimum = 32;
             this.trackBarP.Name = "trackBarP";
@@ -389,11 +397,79 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Prime P";
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.buttonDecrypt);
+            this.panel2.Controls.Add(this.buttonEncrypt);
+            this.panel2.Controls.Add(this.textBoxC);
+            this.panel2.Controls.Add(this.label11);
+            this.panel2.Controls.Add(this.textBoxM);
+            this.panel2.Controls.Add(this.label10);
+            this.panel2.Location = new System.Drawing.Point(454, 13);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(452, 453);
+            this.panel2.TabIndex = 36;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(3, 4);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(47, 13);
+            this.label10.TabIndex = 36;
+            this.label10.Text = "Plaintext";
+            // 
+            // textBoxM
+            // 
+            this.textBoxM.Location = new System.Drawing.Point(6, 19);
+            this.textBoxM.Multiline = true;
+            this.textBoxM.Name = "textBoxM";
+            this.textBoxM.Size = new System.Drawing.Size(443, 143);
+            this.textBoxM.TabIndex = 37;
+            // 
+            // textBoxC
+            // 
+            this.textBoxC.Location = new System.Drawing.Point(6, 220);
+            this.textBoxC.Multiline = true;
+            this.textBoxC.Name = "textBoxC";
+            this.textBoxC.Size = new System.Drawing.Size(443, 143);
+            this.textBoxC.TabIndex = 39;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(3, 205);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(54, 13);
+            this.label11.TabIndex = 38;
+            this.label11.Text = "Ciphertext";
+            // 
+            // buttonEncrypt
+            // 
+            this.buttonEncrypt.Location = new System.Drawing.Point(6, 168);
+            this.buttonEncrypt.Name = "buttonEncrypt";
+            this.buttonEncrypt.Size = new System.Drawing.Size(113, 23);
+            this.buttonEncrypt.TabIndex = 36;
+            this.buttonEncrypt.Text = "Encrypt";
+            this.buttonEncrypt.UseVisualStyleBackColor = true;
+            this.buttonEncrypt.Click += new System.EventHandler(this.buttonEncrypt_Click);
+            // 
+            // buttonDecrypt
+            // 
+            this.buttonDecrypt.Location = new System.Drawing.Point(125, 168);
+            this.buttonDecrypt.Name = "buttonDecrypt";
+            this.buttonDecrypt.Size = new System.Drawing.Size(113, 23);
+            this.buttonDecrypt.TabIndex = 40;
+            this.buttonDecrypt.Text = "Decrypt";
+            this.buttonDecrypt.UseVisualStyleBackColor = true;
+            this.buttonDecrypt.Click += new System.EventHandler(this.buttonDecrypt_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(461, 478);
+            this.ClientSize = new System.Drawing.Size(918, 478);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "Main";
             this.Text = "Main";
@@ -404,6 +480,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarQ)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarP)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -441,5 +519,12 @@
         private System.Windows.Forms.Button buttonFixN;
         private System.Windows.Forms.Button buttonFixQ;
         private System.Windows.Forms.Button buttonFixP;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button buttonDecrypt;
+        private System.Windows.Forms.Button buttonEncrypt;
+        private System.Windows.Forms.TextBox textBoxC;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox textBoxM;
+        private System.Windows.Forms.Label label10;
     }
 }

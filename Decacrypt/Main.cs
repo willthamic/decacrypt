@@ -182,5 +182,41 @@ namespace Decacrypt
                 MainKey.d = pvtKey;
             }
         }
+
+        private void buttonEncrypt_Click(object sender, EventArgs e)
+        {
+            UpdateKey();
+
+            byte[] validity = MainKey.Validate();
+
+            if ((validity[2] == 1 || validity[2] == 2) && (validity[3] == 1 || validity[3] == 2))
+            {
+                BigInteger m;
+                BigInteger.TryParse(textBoxM.Text, out m);
+
+                if (m >= MainKey.n)
+                    return;
+
+                textBoxC.Text = BigInteger.ModPow(m, MainKey.e, MainKey.n).ToString();
+            }
+        }
+
+        private void buttonDecrypt_Click(object sender, EventArgs e)
+        {
+            UpdateKey();
+
+            byte[] validity = MainKey.Validate();
+
+            if ((validity[2] == 1 || validity[2] == 2) && (validity[4] == 1 || validity[4] == 2))
+            {
+                BigInteger c;
+                BigInteger.TryParse(textBoxC.Text, out c);
+
+                if (c >= MainKey.n)
+                    return;
+
+                textBoxM.Text = BigInteger.ModPow(c, MainKey.d, MainKey.n).ToString();
+            }
+        }
     }
 }
