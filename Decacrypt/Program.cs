@@ -35,7 +35,7 @@ namespace Decacrypt
         //    Index [0]   p: 0 - undefined; 1 - valid; 2 - composite; 8 - negative/low.
         //    Index [1]   q: 0 - undefined; 1 - valid; 2 - composite; 8 - negative/low.
         //    Index [2]   n: 0 - undefined; 1 - valid; 2 - possibly valid; 3 - prime; 4 - too many factors (p or q not prime); 5 - incorrect product; 8 - negative/low.
-        //    Index [3]   e: 0 - undefined; 1 - valid; 2 - possibly valid; 3 - too high; 4 - not coprime with (p-1)(q-1); 5 - not modinv of d mod (p-1)(q-1); 8 - negative/low.
+        //    Index [3]   e: 0 - undefined; 1 - valid; 2 - possibly valid; 3 - too high; 4 - not coprime with (p-1)(q-1); 5 - not modinv of e mod (p-1)(q-1); 8 - negative/low.
         //    Index [4]   d: 0 - undefined; 1 - valid; 2 - possibly valid; 3 - too high; 4 - not coprime with (p-1)(q-1); 5 - not modinv of d mod (p-1)(q-1); 8 - negative/low.
         //    Index [5] all: 1 - valid; 2 - possibly valid; 3 - invalid.
         public byte[] Validate()
@@ -68,7 +68,7 @@ namespace Decacrypt
                 array[4] = ValidateExponent(p, q, n, d, e);
 
             // If the first 5 indexes are equal to 1, for valid, set the index 6 to 1 for valid.
-            if (array == new byte[] { 1, 1, 1, 1, 1, 0 })
+            if (array[0] == 1 && array[1] == 1 && array[2] == 1 && array[3] == 1 && array[4] == 1)
                 array[5] = 1;
 
             // If any of the first 5 indexes are not either valid, or possibly valid, or undefined, set the index for 6 to 3 for invalid.
@@ -157,7 +157,7 @@ namespace Decacrypt
                     validity = 4;
 
                 // If 'd' is defined and the modular inverse of 'd' mod '(p-1)(q-1)' does not equal e, set the index for 'e' to 5 for not modinv of d mod (p-1)(q-1).
-                else if ((e != 0) && (CryptoMath.ModInv(d, (p - 1) * (q - 1)) == e))
+                else if ((e != 0) && (d != 0) && (CryptoMath.ModInv(d, (p - 1) * (q - 1)) != e))
                     validity = 5;
 
                 // If above pass, set the index for 'e' to 1 for valid.
@@ -189,13 +189,23 @@ namespace Decacrypt
         // O: BigInteger - The large prime. 
         static public BigInteger FindPrime(int n, string method, int k)
         {
+            if (n < 8)
+                return -1;
+            if (k < 1)
+                return -1;
+
+            // Random Number Generator
             var rng = new RNGCryptoServiceProvider();
 
+            // Begins loop until prime is found.
             while (true)
             {
+                // Creates a random BigInteger for testing with the amount of bits specified by the input 'n'.
                 byte[] bytes = new byte[n / 8];
                 rng.GetBytes(bytes);
                 BigInteger p = new BigInteger(bytes);
+
+                // Begins a switch that uses the specified method to check if prime.
                 switch (method)
                 {
                     case "Fermat":
@@ -206,6 +216,8 @@ namespace Decacrypt
                         if (MillerRabin(p, k) == 1)
                             return p;
                         break;
+                    default:
+                        return -1;
                 }
             }
         }
@@ -232,7 +244,7 @@ namespace Decacrypt
                 // This is because the random function will not take a value larger than int.MaxValue.
                 BigInteger a = RandomRange(2, n - 2);
 
-                // Returns 0 for composite if a^(n-1)%n does not equal 1.
+                // Returns 0 for composite if 'a^(n-1)%n' does not equal 1.
                 if (BigInteger.ModPow(a, n - 1, n) != 1)
                     return 0;
             }
@@ -328,12 +340,45 @@ namespace Decacrypt
         // Finds the modular inverse of a number 'a' modulo another number 'b'.
         // I: BigInteger a; BigInteger b;
         // O: BigInteger - modular inverse of a mod b.
-        static public BigInteger ModInv(BigInteger a, BigInteger b)
+        static public BigInteger ModInv(BigInteger a, BigInteger n)
         {
-            if (BigInteger.GreatestCommonDivisor(a, b) == 1)
-                return BigInteger.ModPow(a, b - 2, b);
-            else
+            // These BigIntegers are used to calculate the inverse.
+            BigInteger t = 0;
+            BigInteger tn = 1;
+            BigInteger r = n;
+            BigInteger rn = a;
+
+            // These BigIntegers are used for swapping the above values.
+            BigInteger t_temp;
+            BigInteger tn_temp;
+            BigInteger r_temp;
+            BigInteger rn_temp;
+
+            while (rn != 0)
+            {
+                BigInteger quotient = r / rn;
+
+                // Some of the values need to be swapped, which requires temporary variables.
+                t_temp = tn;
+                tn_temp = t - quotient * tn;
+                r_temp = rn;
+                rn_temp = r - quotient * rn;
+
+                // Temporary variables are assigned to the actual variables.
+                t = t_temp;
+                tn = tn_temp;
+                r = r_temp;
+                rn = rn_temp;
+            }
+            // If 'r' is greater than 1, return -1 for invalid.
+            if (r > 1)
                 return -1;
+            // If 't' is less than 0, add 'n' to 't'.
+            if (t < 0)
+                t += n;
+
+            // Return the inverse 't'.
+            return t;
         }
     }
 }
