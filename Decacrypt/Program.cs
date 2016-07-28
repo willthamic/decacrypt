@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Numerics;
 using System.Security.Cryptography;
+using System.Globalization;
 
 namespace Decacrypt
 {
@@ -178,6 +179,45 @@ namespace Decacrypt
             }
 
             return validity;
+        }
+    }
+
+    class Base {
+        static public string ConvertBase (string value, string inputBase, string outputBase)
+        {
+            if (inputBase == outputBase)
+            {
+                return value;
+            }
+
+
+
+            BigInteger dec;
+            switch (inputBase)
+            {
+                case "B64":
+                    dec = new BigInteger(Convert.FromBase64String(value));
+                    break;
+                case "HEX":
+                    dec = BigInteger.Parse(value, NumberStyles.AllowHexSpecifier);
+                    break;
+                case "DEC":
+                    BigInteger.TryParse(value, out dec);
+                    break;
+                default:
+                    return "ERROR: INVALID";
+            }
+            switch (outputBase)
+            {
+                case "B64":
+                    return Convert.ToBase64String(dec.ToByteArray());
+                case "HEX":
+                    return dec.ToString("X");
+                case "DEC":
+                    return dec.ToString();
+                default:
+                    return "ERROR: INVALID";
+            }
         }
     }
 
