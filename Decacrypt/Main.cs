@@ -23,32 +23,37 @@ namespace Decacrypt
 
         private void Main_Load(object sender, EventArgs e)
         {
-            
         }
 
         public void UpdateKey()
         {
-            BigInteger.TryParse(textBoxP.Text, out MainKey.p);
-            BigInteger.TryParse(textBoxQ.Text, out MainKey.q);
-            BigInteger.TryParse(textBoxN.Text, out MainKey.n);
-            BigInteger.TryParse(textBoxE.Text, out MainKey.e);
-            BigInteger.TryParse(textBoxD.Text, out MainKey.d);
+            BigInteger.TryParse(Base.ConvertBase(textBoxP.Text, comboBoxP.Text, "DEC"), out MainKey.p);
+            BigInteger.TryParse(Base.ConvertBase(textBoxQ.Text, comboBoxQ.Text, "DEC"), out MainKey.q);
+            BigInteger.TryParse(Base.ConvertBase(textBoxN.Text, comboBoxN.Text, "DEC"), out MainKey.n);
+            BigInteger.TryParse(Base.ConvertBase(textBoxE.Text, comboBoxE.Text, "DEC"), out MainKey.e);
+            BigInteger.TryParse(Base.ConvertBase(textBoxD.Text, comboBoxD.Text, "DEC"), out MainKey.d);
+        }
+
+        public void UpdateText()
+        {
+            if (MainKey.p != 0)
+                textBoxP.Text = Base.ConvertBase(MainKey.p.ToString(), "DEC", comboBoxP.Text);
+            if (MainKey.q != 0)
+                textBoxQ.Text = Base.ConvertBase(MainKey.q.ToString(), "DEC", comboBoxQ.Text);
+            if (MainKey.n != 0)
+                textBoxN.Text = Base.ConvertBase(MainKey.n.ToString(), "DEC", comboBoxN.Text);
+            if (MainKey.e != 0)
+                textBoxE.Text = Base.ConvertBase(MainKey.e.ToString(), "DEC", comboBoxE.Text);
+            if (MainKey.d != 0)
+                textBoxD.Text = Base.ConvertBase(MainKey.d.ToString(), "DEC", comboBoxD.Text);
         }
 
         private void buttonVerifyKey_Click(object sender, EventArgs e)
         {
-            // Create object using class 'Key' called 'key'.
-            Key key = new Key();
-
-            // Parse the inputs into the the valiables inside the object.
-            BigInteger.TryParse(textBoxP.Text, out key.p);
-            BigInteger.TryParse(textBoxQ.Text, out key.q);
-            BigInteger.TryParse(textBoxN.Text, out key.n);
-            BigInteger.TryParse(textBoxE.Text, out key.e);
-            BigInteger.TryParse(textBoxD.Text, out key.d);
+            UpdateKey();
 
             // Validate the key and set the output array to a byte array, 'validity'.
-            byte[] validity = key.Validate();
+            byte[] validity = MainKey.Validate();
 
             // Display a message box, first showing 'Valid' or 'Invalid', then the array which is necessary for debugging.
             MessageBox.Show(((validity[5] == 1) || (validity[5] == 2) ? "Valid: " : "Invalid: ") + string.Join(",", validity));
@@ -61,10 +66,8 @@ namespace Decacrypt
             // Generate a new prime with the amount of bits specified by the trackbar.
             MainKey.p = CryptoMath.FindPrime(trackBarP.Value, "MillerRabin", 50);
 
-            // Reset textboxes 'q' and 'n' to the correct values.
-            textBoxP.Text = MainKey.p.ToString();
-            if (MainKey.q != 0)
-                textBoxN.Text = (MainKey.p * MainKey.q).ToString();
+            // Reset textboxes to the correct values.
+            UpdateText();
         }
 
         private void buttonNewQ_Click(object sender, EventArgs e)
@@ -74,22 +77,21 @@ namespace Decacrypt
             // Generate a new prime with the amount of bits specified by the trackbar.
             MainKey.q = CryptoMath.FindPrime(trackBarQ.Value, "MillerRabin", 50);
 
-            // Reset textboxes 'q' and 'n' to the correct values.
-            textBoxQ.Text = MainKey.q.ToString();
-            if (MainKey.p != 0)
-                textBoxN.Text = (MainKey.p * MainKey.q).ToString();
+            // Reset textboxes to the correct values.
+            UpdateText();
         }
 
         private void buttonNewN_Click(object sender, EventArgs e)
         {
-            // Generate two primes at size of half the bits set by the 'n' trackbar.
-            BigInteger p = CryptoMath.FindPrime(trackBarN.Value / 2, "MillerRabin", 50);
-            BigInteger q = CryptoMath.FindPrime(trackBarN.Value / 2, "MillerRabin", 50);
+            UpdateKey();
 
-            // Reset the textboxes 'p', 'q', and 'n' to the correct values.
-            textBoxP.Text = p.ToString();
-            textBoxQ.Text = q.ToString();
-            textBoxN.Text = (p * q).ToString();
+            // Generate two primes at size of half the bits set by the 'n' trackbar.
+            MainKey.p = CryptoMath.FindPrime(trackBarN.Value / 2, "MillerRabin", 50);
+            MainKey.q = CryptoMath.FindPrime(trackBarN.Value / 2, "MillerRabin", 50);
+            MainKey.n = MainKey.p * MainKey.q;
+
+            // Reset textboxes to the correct values.
+            UpdateText();
         }
 
         private void buttonNewE_Click(object sender, EventArgs e)
@@ -105,11 +107,11 @@ namespace Decacrypt
 
             if (validity[0] == 1 && validity[1] == 1)
             {
-                BigInteger pvtExp = CryptoMath.ModInv(MainKey.e, (MainKey.p - 1) * (MainKey.q - 1));
-                textBoxD.Text = pvtExp.ToString();
-                MainKey.d = pvtExp;
+                MainKey.d = CryptoMath.ModInv(MainKey.e, (MainKey.p - 1) * (MainKey.q - 1));
             }
 
+            // Reset textboxes to the correct values.
+            UpdateText();
         }
 
         // If both 'n' and 'q' are defined and valid, calculate and fill in 'p'.
@@ -122,8 +124,10 @@ namespace Decacrypt
             if (validity[1] == 1 && (validity[2] == 1 || validity[2] == 2))
             {
                 MainKey.p = MainKey.n / MainKey.q;
-                textBoxP.Text = MainKey.p.ToString();
             }
+
+            // Reset textboxes to the correct values.
+            UpdateText();
         }
 
         // If both 'n' and 'p' are defined and valid, calculate and fill in 'q'.
@@ -136,8 +140,10 @@ namespace Decacrypt
             if (validity[0] == 1 && (validity[2] == 1 || validity[2] == 2))
             {
                 MainKey.q = MainKey.n / MainKey.p;
-                textBoxQ.Text = MainKey.q.ToString();
             }
+
+            // Reset textboxes to the correct values.
+            UpdateText();
         }
 
         // If both, 'p' and 'q' are defined and valid, calculate and fill in 'n'.
@@ -150,8 +156,10 @@ namespace Decacrypt
             if (validity[0] == 1 && validity[1] == 1)
             {
                 MainKey.n = MainKey.p * MainKey.q;
-                textBoxN.Text = MainKey.n.ToString();
             }
+
+            // Reset textboxes to the correct values.
+            UpdateText();
         }
 
         // If both, 'p', 'q' and 'd' are defined and valid, calculate and fill in 'e'.
@@ -163,10 +171,11 @@ namespace Decacrypt
 
             if (validity[0] == 1 && validity[1] == 1 && validity[4] == 1)
             {
-                BigInteger pubKey = CryptoMath.ModInv(MainKey.d, (MainKey.p - 1) * (MainKey.q - 1));
-                textBoxE.Text = pubKey.ToString();
-                MainKey.e = pubKey;
+                MainKey.e = CryptoMath.ModInv(MainKey.d, (MainKey.p - 1) * (MainKey.q - 1));
             }
+
+            // Reset textboxes to the correct values.
+            UpdateText();
         }
 
         private void buttonFixD_Click(object sender, EventArgs e)
@@ -177,10 +186,11 @@ namespace Decacrypt
 
             if (validity[0] == 1 && validity[1] == 1 && validity[3] == 1)
             {
-                BigInteger pvtKey = CryptoMath.ModInv(MainKey.e, (MainKey.p - 1) * (MainKey.q - 1));
-                textBoxD.Text = pvtKey.ToString();
-                MainKey.d = pvtKey;
+                MainKey.d = CryptoMath.ModInv(MainKey.e, (MainKey.p - 1) * (MainKey.q - 1));
             }
+
+            // Reset textboxes to the correct values.
+            UpdateText();
         }
 
         private void buttonEncrypt_Click(object sender, EventArgs e)
@@ -218,5 +228,6 @@ namespace Decacrypt
                 textBoxM.Text = BigInteger.ModPow(c, MainKey.d, MainKey.n).ToString();
             }
         }
+
     }
 }

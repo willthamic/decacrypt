@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Numerics;
 using System.Security.Cryptography;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace Decacrypt
 {
@@ -185,23 +186,33 @@ namespace Decacrypt
     class Base {
         static public string ConvertBase (string value, string inputBase, string outputBase)
         {
+            if (value == "")
+                return "";
+
             if (inputBase == outputBase)
-            {
                 return value;
-            }
 
-
+            Regex B64 = new Regex(@"[^A-Za-z0-9=+/]");
+            Regex HEX = new Regex(@"[^0-9A-Fa-f]");
+            Regex DEC = new Regex(@"[^0-9]");
+            Regex BIN = new Regex(@"[^01]");
 
             BigInteger dec;
             switch (inputBase)
             {
                 case "B64":
+                    if (B64.IsMatch(value))
+                        return "ERROR: INVALID";
                     dec = new BigInteger(Convert.FromBase64String(value));
                     break;
                 case "HEX":
+                    if (HEX.IsMatch(value))
+                        return "ERROR: INVALID";
                     dec = BigInteger.Parse(value, NumberStyles.AllowHexSpecifier);
                     break;
                 case "DEC":
+                    if (DEC.IsMatch(value))
+                        return "ERROR: INVALID";
                     BigInteger.TryParse(value, out dec);
                     break;
                 default:
