@@ -23,19 +23,29 @@ namespace Decacrypt
 
         private void Main_Load(object sender, EventArgs e)
         {
+            // Sets default state to comboBoxes.
+            comboBoxP.SelectedItem = "DEC";
+            comboBoxQ.SelectedItem = "DEC";
+            comboBoxN.SelectedItem = "DEC";
+            comboBoxE.SelectedItem = "DEC";
+            comboBoxD.SelectedItem = "DEC";
+            comboBoxM.SelectedItem = "DEC";
+            comboBoxC.SelectedItem = "DEC";
         }
 
         public void UpdateKey()
         {
+            // Converts and assigns the values of the textboxes to the key.
             BigInteger.TryParse(Base.ConvertBase(textBoxP.Text, comboBoxP.Text, "DEC"), out MainKey.p);
             BigInteger.TryParse(Base.ConvertBase(textBoxQ.Text, comboBoxQ.Text, "DEC"), out MainKey.q);
             BigInteger.TryParse(Base.ConvertBase(textBoxN.Text, comboBoxN.Text, "DEC"), out MainKey.n);
             BigInteger.TryParse(Base.ConvertBase(textBoxE.Text, comboBoxE.Text, "DEC"), out MainKey.e);
             BigInteger.TryParse(Base.ConvertBase(textBoxD.Text, comboBoxD.Text, "DEC"), out MainKey.d);
         }
-
+        
         public void UpdateText()
         {
+            // Converts and sets the values of the key to the textboxes.
             if (MainKey.p != 0)
                 textBoxP.Text = Base.ConvertBase(MainKey.p.ToString(), "DEC", comboBoxP.Text);
             if (MainKey.q != 0)
@@ -178,6 +188,7 @@ namespace Decacrypt
             UpdateText();
         }
 
+        // If both, 'p', 'q' and 'e' are defined and valid, calculate and fill in 'd'. 
         private void buttonFixD_Click(object sender, EventArgs e)
         {
             UpdateKey();
@@ -193,12 +204,14 @@ namespace Decacrypt
             UpdateText();
         }
 
+        // If the key is valid, calculate the ciphertext.
         private void buttonEncrypt_Click(object sender, EventArgs e)
         {
             UpdateKey();
 
             byte[] validity = MainKey.Validate();
 
+            // Runs of the key is valid for encryption.
             if ((validity[2] == 1 || validity[2] == 2) && (validity[3] == 1 || validity[3] == 2))
             {
                 BigInteger m;
@@ -211,12 +224,14 @@ namespace Decacrypt
             }
         }
 
+        // If the key is valid, calculate the plaintext.
         private void buttonDecrypt_Click(object sender, EventArgs e)
         {
             UpdateKey();
 
             byte[] validity = MainKey.Validate();
 
+            // Runs of the key is valid for decryption.
             if ((validity[2] == 1 || validity[2] == 2) && (validity[4] == 1 || validity[4] == 2))
             {
                 BigInteger c;
