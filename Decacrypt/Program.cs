@@ -7,6 +7,7 @@ using System.Numerics;
 using System.Security.Cryptography;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using System.Text;
 
 namespace Decacrypt
 {
@@ -20,7 +21,7 @@ namespace Decacrypt
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Main());
+            Application.Run(new Decacrypt());
         }
     }
 
@@ -199,10 +200,9 @@ namespace Decacrypt
             Regex B64 = new Regex(@"[^A-Za-z0-9=+/]");
             Regex HEX = new Regex(@"[^0-9A-Fa-f]");
             Regex DEC = new Regex(@"[^0-9]");
-            Regex BIN = new Regex(@"[^01]");
 
             // BigInteger used for conversion.
-            BigInteger dec;
+            BigInteger dec = 0;
 
             // Converts input to decimal.
             switch (inputBase)
@@ -211,7 +211,13 @@ namespace Decacrypt
                 case "B64":
                     if (B64.IsMatch(value))
                         return "ERROR: INVALID";
-                    dec = new BigInteger(Convert.FromBase64String(value));
+                    try
+                    {
+                        dec = new BigInteger(Convert.FromBase64String(value));
+                    } catch
+                    {
+                        return "ERROR: INVALID";
+                    }
                     break;
                 case "HEX":
                     if (HEX.IsMatch(value))

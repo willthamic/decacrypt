@@ -11,12 +11,12 @@ using System.Numerics;
 
 namespace Decacrypt
 {
-    public partial class Main : Form
+    public partial class Decacrypt : Form
     {
         Key MainKey = new Key();
         
 
-        public Main()
+        public Decacrypt()
         {
             InitializeComponent();
         }
@@ -215,12 +215,19 @@ namespace Decacrypt
             if ((validity[2] == 1 || validity[2] == 2) && (validity[3] == 1 || validity[3] == 2))
             {
                 BigInteger m;
-                BigInteger.TryParse(textBoxM.Text, out m);
+                if (comboBoxM.Text == "TEXT")
+                {
+                    m = new BigInteger(Encoding.ASCII.GetBytes(textBoxM.Text));
+                }
+                else
+                {
+                    BigInteger.TryParse(Base.ConvertBase(textBoxM.Text, comboBoxM.Text, "DEC"), out m);
+                }
 
                 if (m >= MainKey.n)
                     return;
 
-                textBoxC.Text = BigInteger.ModPow(m, MainKey.e, MainKey.n).ToString();
+                textBoxC.Text = Base.ConvertBase(BigInteger.ModPow(m, MainKey.e, MainKey.n).ToString(), "DEC", comboBoxC.Text);
             }
         }
 
@@ -235,14 +242,38 @@ namespace Decacrypt
             if ((validity[2] == 1 || validity[2] == 2) && (validity[4] == 1 || validity[4] == 2))
             {
                 BigInteger c;
-                BigInteger.TryParse(textBoxC.Text, out c);
+                BigInteger.TryParse(Base.ConvertBase(textBoxC.Text, comboBoxC.Text, "DEC"), out c);
 
                 if (c >= MainKey.n)
                     return;
-
-                textBoxM.Text = BigInteger.ModPow(c, MainKey.d, MainKey.n).ToString();
+                if (comboBoxM.Text == "TEXT")
+                {
+                    textBoxM.Text = Encoding.ASCII.GetString(BigInteger.ModPow(c, MainKey.d, MainKey.n).ToByteArray());
+                } else
+                {
+                    textBoxM.Text = Base.ConvertBase(BigInteger.ModPow(c, MainKey.d, MainKey.n).ToString(), "DEC", comboBoxM.Text);
+                }
             }
         }
 
+        private void buttonCopyPublic_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText("(" + textBoxN.Text + "," + textBoxE.Text + ")");
+        }
+
+        private void buttonCopyPrivate_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText("(" + textBoxN.Text + "," + textBoxD.Text + ")");
+        }
+
+        private void buttonCopyPlain_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(textBoxM.Text);
+        }
+
+        private void buttonCopyCipher_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(textBoxC.Text);
+        }
     }
 }
