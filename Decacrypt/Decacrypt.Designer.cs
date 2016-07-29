@@ -83,6 +83,18 @@
             this.comboBoxQ = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.comboBoxP = new System.Windows.Forms.ComboBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemFileOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemFileSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemFileNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemGeneratePrimes = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemCheckPrimes = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemGitHub = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemGuide = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarE)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarN)).BeginInit();
@@ -90,6 +102,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarP)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -124,9 +137,9 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.textBoxP);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(153, 13);
+            this.panel1.Location = new System.Drawing.Point(152, 28);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(436, 451);
+            this.panel1.Size = new System.Drawing.Size(436, 453);
             this.panel1.TabIndex = 0;
             // 
             // buttonFixD
@@ -427,7 +440,7 @@
             this.panel2.Controls.Add(this.label11);
             this.panel2.Controls.Add(this.textBoxM);
             this.panel2.Controls.Add(this.label10);
-            this.panel2.Location = new System.Drawing.Point(595, 13);
+            this.panel2.Location = new System.Drawing.Point(594, 28);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(452, 453);
             this.panel2.TabIndex = 36;
@@ -522,7 +535,7 @@
             this.panel3.Controls.Add(this.comboBoxQ);
             this.panel3.Controls.Add(this.label12);
             this.panel3.Controls.Add(this.comboBoxP);
-            this.panel3.Location = new System.Drawing.Point(13, 12);
+            this.panel3.Location = new System.Drawing.Point(12, 27);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(135, 454);
             this.panel3.TabIndex = 37;
@@ -682,14 +695,109 @@
             this.comboBoxP.Size = new System.Drawing.Size(121, 21);
             this.comboBoxP.TabIndex = 0;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.optionsToolStripMenuItem,
+            this.toolsToolStripMenuItem,
+            this.helpToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1061, 24);
+            this.menuStrip1.TabIndex = 38;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemFileOpen,
+            this.toolStripMenuItemFileSave,
+            this.toolStripMenuItemFileNew});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.optionsToolStripMenuItem.Text = "Options";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemGuide,
+            this.toolStripMenuItemGitHub});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // toolStripMenuItemFileOpen
+            // 
+            this.toolStripMenuItemFileOpen.Name = "toolStripMenuItemFileOpen";
+            this.toolStripMenuItemFileOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.toolStripMenuItemFileOpen.Size = new System.Drawing.Size(32, 19);
+            this.toolStripMenuItemFileOpen.Text = "Open Key";
+            // 
+            // toolStripMenuItemFileSave
+            // 
+            this.toolStripMenuItemFileSave.Name = "toolStripMenuItemFileSave";
+            this.toolStripMenuItemFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.toolStripMenuItemFileSave.Size = new System.Drawing.Size(32, 19);
+            this.toolStripMenuItemFileSave.Text = "Save Key";
+            // 
+            // toolStripMenuItemFileNew
+            // 
+            this.toolStripMenuItemFileNew.Name = "toolStripMenuItemFileNew";
+            this.toolStripMenuItemFileNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.toolStripMenuItemFileNew.Size = new System.Drawing.Size(32, 19);
+            this.toolStripMenuItemFileNew.Text = "New Key";
+            // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemGeneratePrimes,
+            this.toolStripMenuItemCheckPrimes});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.toolsToolStripMenuItem.Text = "Tools";
+            // 
+            // toolStripMenuItemGeneratePrimes
+            // 
+            this.toolStripMenuItemGeneratePrimes.Name = "toolStripMenuItemGeneratePrimes";
+            this.toolStripMenuItemGeneratePrimes.Size = new System.Drawing.Size(160, 22);
+            this.toolStripMenuItemGeneratePrimes.Text = "Generate Primes";
+            // 
+            // toolStripMenuItemCheckPrimes
+            // 
+            this.toolStripMenuItemCheckPrimes.Name = "toolStripMenuItemCheckPrimes";
+            this.toolStripMenuItemCheckPrimes.Size = new System.Drawing.Size(160, 22);
+            this.toolStripMenuItemCheckPrimes.Text = "Check Primes";
+            // 
+            // toolStripMenuItemGitHub
+            // 
+            this.toolStripMenuItemGitHub.Name = "toolStripMenuItemGitHub";
+            this.toolStripMenuItemGitHub.Size = new System.Drawing.Size(185, 22);
+            this.toolStripMenuItemGitHub.Text = "Decacrypt on GitHub";
+            // 
+            // toolStripMenuItemGuide
+            // 
+            this.toolStripMenuItemGuide.Name = "toolStripMenuItemGuide";
+            this.toolStripMenuItemGuide.Size = new System.Drawing.Size(185, 22);
+            this.toolStripMenuItemGuide.Text = "Guide";
+            // 
             // Decacrypt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1061, 478);
+            this.ClientSize = new System.Drawing.Size(1061, 485);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Decacrypt";
             this.Text = "Decacrypt";
             this.Load += new System.EventHandler(this.Main_Load);
@@ -703,7 +811,10 @@
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -764,5 +875,17 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button buttonCopyPlain;
         private System.Windows.Forms.Button buttonCopyCipher;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFileOpen;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFileSave;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFileNew;
+        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemGeneratePrimes;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemCheckPrimes;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemGuide;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemGitHub;
     }
 }
