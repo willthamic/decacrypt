@@ -184,6 +184,9 @@ namespace Decacrypt
     }
 
     class Base {
+        // Converts values between bases.
+        // I: string value - Value being converted; string inputBase - Base of the input; string outputBase - Base of the output.
+        // O: string - converted input.
         static public string ConvertBase (string value, string inputBase, string outputBase)
         {
             if (value == "")
@@ -192,14 +195,19 @@ namespace Decacrypt
             if (inputBase == outputBase)
                 return value;
 
+            // Regex values that select characters other than characters used for that base.
             Regex B64 = new Regex(@"[^A-Za-z0-9=+/]");
             Regex HEX = new Regex(@"[^0-9A-Fa-f]");
             Regex DEC = new Regex(@"[^0-9]");
             Regex BIN = new Regex(@"[^01]");
 
+            // BigInteger used for conversion.
             BigInteger dec;
+
+            // Converts input to decimal.
             switch (inputBase)
             {
+                // If any of the characters in the input are selected by the corresponding regex, return error.
                 case "B64":
                     if (B64.IsMatch(value))
                         return "ERROR: INVALID";
@@ -218,6 +226,8 @@ namespace Decacrypt
                 default:
                     return "ERROR: INVALID";
             }
+
+            // Converts decimal to output.
             switch (outputBase)
             {
                 case "B64":
