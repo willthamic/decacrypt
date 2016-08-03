@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Decacrypt
 {
-    public partial class Form1 : Form
+    public partial class Simple : Form
     {
-        public Form1()
+        public Simple()
         {
             InitializeComponent();
         }

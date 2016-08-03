@@ -96,6 +96,7 @@
             this.toolStripMenuItemGuide = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemGitHub = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label19 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarE)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarN)).BeginInit();
@@ -798,11 +799,22 @@
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(429, 486);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(615, 13);
+            this.label19.TabIndex = 39;
+            this.label19.Text = "This product is for educational purposes only, and should not be used in a secure" +
+    " environment, or for legitimate security purposes.";
+            // 
             // Advanced
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1043, 485);
+            this.ClientSize = new System.Drawing.Size(1043, 503);
+            this.Controls.Add(this.label19);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -899,5 +911,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemGuide;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemGitHub;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.Label label19;
     }
 }
