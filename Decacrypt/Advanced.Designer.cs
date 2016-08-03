@@ -1,6 +1,6 @@
 ﻿namespace Decacrypt
 {
-    partial class Decacrypt
+    partial class Advanced
     {
         /// <summary>
         /// Required designer variable.
@@ -85,16 +85,17 @@
             this.comboBoxP = new System.Windows.Forms.ComboBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemFileOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemFileSave = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemFileNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemGeneratePrimes = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemCheckPrimes = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemGitHub = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemGuide = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemGitHub = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarE)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarN)).BeginInit();
@@ -137,7 +138,7 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.textBoxP);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(152, 28);
+            this.panel1.Location = new System.Drawing.Point(144, 28);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(436, 453);
             this.panel1.TabIndex = 0;
@@ -440,14 +441,14 @@
             this.panel2.Controls.Add(this.label11);
             this.panel2.Controls.Add(this.textBoxM);
             this.panel2.Controls.Add(this.label10);
-            this.panel2.Location = new System.Drawing.Point(594, 28);
+            this.panel2.Location = new System.Drawing.Point(586, 28);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(452, 453);
             this.panel2.TabIndex = 36;
             // 
             // buttonCopyPlain
             // 
-            this.buttonCopyPlain.Location = new System.Drawing.Point(231, 168);
+            this.buttonCopyPlain.Location = new System.Drawing.Point(227, 214);
             this.buttonCopyPlain.Name = "buttonCopyPlain";
             this.buttonCopyPlain.Size = new System.Drawing.Size(105, 23);
             this.buttonCopyPlain.TabIndex = 42;
@@ -457,7 +458,7 @@
             // 
             // buttonCopyCipher
             // 
-            this.buttonCopyCipher.Location = new System.Drawing.Point(344, 168);
+            this.buttonCopyCipher.Location = new System.Drawing.Point(340, 214);
             this.buttonCopyCipher.Name = "buttonCopyCipher";
             this.buttonCopyCipher.Size = new System.Drawing.Size(105, 23);
             this.buttonCopyCipher.TabIndex = 41;
@@ -467,7 +468,7 @@
             // 
             // buttonDecrypt
             // 
-            this.buttonDecrypt.Location = new System.Drawing.Point(118, 168);
+            this.buttonDecrypt.Location = new System.Drawing.Point(114, 214);
             this.buttonDecrypt.Name = "buttonDecrypt";
             this.buttonDecrypt.Size = new System.Drawing.Size(105, 23);
             this.buttonDecrypt.TabIndex = 40;
@@ -477,7 +478,7 @@
             // 
             // buttonEncrypt
             // 
-            this.buttonEncrypt.Location = new System.Drawing.Point(6, 168);
+            this.buttonEncrypt.Location = new System.Drawing.Point(2, 214);
             this.buttonEncrypt.Name = "buttonEncrypt";
             this.buttonEncrypt.Size = new System.Drawing.Size(105, 23);
             this.buttonEncrypt.TabIndex = 36;
@@ -487,16 +488,16 @@
             // 
             // textBoxC
             // 
-            this.textBoxC.Location = new System.Drawing.Point(6, 220);
+            this.textBoxC.Location = new System.Drawing.Point(6, 259);
             this.textBoxC.Multiline = true;
             this.textBoxC.Name = "textBoxC";
-            this.textBoxC.Size = new System.Drawing.Size(443, 143);
+            this.textBoxC.Size = new System.Drawing.Size(443, 188);
             this.textBoxC.TabIndex = 39;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(3, 205);
+            this.label11.Location = new System.Drawing.Point(3, 243);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(54, 13);
             this.label11.TabIndex = 38;
@@ -504,10 +505,10 @@
             // 
             // textBoxM
             // 
-            this.textBoxM.Location = new System.Drawing.Point(6, 19);
+            this.textBoxM.Location = new System.Drawing.Point(2, 20);
             this.textBoxM.Multiline = true;
             this.textBoxM.Name = "textBoxM";
-            this.textBoxM.Size = new System.Drawing.Size(443, 143);
+            this.textBoxM.Size = new System.Drawing.Size(443, 188);
             this.textBoxM.TabIndex = 37;
             // 
             // label10
@@ -535,7 +536,7 @@
             this.panel3.Controls.Add(this.comboBoxQ);
             this.panel3.Controls.Add(this.label12);
             this.panel3.Controls.Add(this.comboBoxP);
-            this.panel3.Location = new System.Drawing.Point(12, 27);
+            this.panel3.Location = new System.Drawing.Point(4, 27);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(135, 454);
             this.panel3.TabIndex = 37;
@@ -697,7 +698,7 @@
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.Window;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.optionsToolStripMenuItem,
@@ -705,7 +706,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1061, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1043, 24);
             this.menuStrip1.TabIndex = 38;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -719,41 +720,32 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
-            // optionsToolStripMenuItem
-            // 
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.optionsToolStripMenuItem.Text = "Options";
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemGuide,
-            this.toolStripMenuItemGitHub});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
             // toolStripMenuItemFileOpen
             // 
             this.toolStripMenuItemFileOpen.Name = "toolStripMenuItemFileOpen";
             this.toolStripMenuItemFileOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.toolStripMenuItemFileOpen.Size = new System.Drawing.Size(32, 19);
+            this.toolStripMenuItemFileOpen.Size = new System.Drawing.Size(168, 22);
             this.toolStripMenuItemFileOpen.Text = "Open Key";
             // 
             // toolStripMenuItemFileSave
             // 
             this.toolStripMenuItemFileSave.Name = "toolStripMenuItemFileSave";
             this.toolStripMenuItemFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.toolStripMenuItemFileSave.Size = new System.Drawing.Size(32, 19);
+            this.toolStripMenuItemFileSave.Size = new System.Drawing.Size(168, 22);
             this.toolStripMenuItemFileSave.Text = "Save Key";
             // 
             // toolStripMenuItemFileNew
             // 
             this.toolStripMenuItemFileNew.Name = "toolStripMenuItemFileNew";
             this.toolStripMenuItemFileNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.toolStripMenuItemFileNew.Size = new System.Drawing.Size(32, 19);
+            this.toolStripMenuItemFileNew.Size = new System.Drawing.Size(168, 22);
             this.toolStripMenuItemFileNew.Text = "New Key";
+            // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.optionsToolStripMenuItem.Text = "Options";
             // 
             // toolsToolStripMenuItem
             // 
@@ -776,11 +768,15 @@
             this.toolStripMenuItemCheckPrimes.Size = new System.Drawing.Size(160, 22);
             this.toolStripMenuItemCheckPrimes.Text = "Check Primes";
             // 
-            // toolStripMenuItemGitHub
+            // helpToolStripMenuItem
             // 
-            this.toolStripMenuItemGitHub.Name = "toolStripMenuItemGitHub";
-            this.toolStripMenuItemGitHub.Size = new System.Drawing.Size(185, 22);
-            this.toolStripMenuItemGitHub.Text = "Decacrypt on GitHub";
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemGuide,
+            this.toolStripMenuItemGitHub,
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
             // 
             // toolStripMenuItemGuide
             // 
@@ -788,18 +784,33 @@
             this.toolStripMenuItemGuide.Size = new System.Drawing.Size(185, 22);
             this.toolStripMenuItemGuide.Text = "Guide";
             // 
-            // Decacrypt
+            // toolStripMenuItemGitHub
+            // 
+            this.toolStripMenuItemGitHub.Name = "toolStripMenuItemGitHub";
+            this.toolStripMenuItemGitHub.Size = new System.Drawing.Size(185, 22);
+            this.toolStripMenuItemGitHub.Text = "Decacrypt on GitHub";
+            this.toolStripMenuItemGitHub.Click += new System.EventHandler(this.toolStripMenuItemGitHub_Click);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // Advanced
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1061, 485);
+            this.ClientSize = new System.Drawing.Size(1043, 485);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Decacrypt";
-            this.Text = "Decacrypt";
+            this.Name = "Advanced";
+            this.Text = "Decacrypt - Advanced";
             this.Load += new System.EventHandler(this.Main_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -887,5 +898,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemCheckPrimes;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemGuide;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemGitHub;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }

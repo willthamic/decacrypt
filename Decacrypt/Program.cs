@@ -21,7 +21,7 @@ namespace Decacrypt
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Decacrypt());
+            Application.Run(new Advanced());
         }
     }
 

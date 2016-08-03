@@ -8,15 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Numerics;
+using System.Diagnostics;
 
 namespace Decacrypt
 {
-    public partial class Decacrypt : Form
+    public partial class Advanced : Form
     {
         Key MainKey = new Key();
         
 
-        public Decacrypt()
+        public Advanced()
         {
             InitializeComponent();
         }
@@ -274,6 +275,17 @@ namespace Decacrypt
         private void buttonCopyCipher_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(textBoxC.Text);
+        }
+
+        private void toolStripMenuItemGitHub_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/willthamic/decacrypt");
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox about = new AboutBox();
+            about.ShowDialog(); 
         }
     }
 }
